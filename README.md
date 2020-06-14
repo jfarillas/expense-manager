@@ -1,3 +1,2 @@
 # Expense Manager
-## By: Joseph Ian Farillas
-Admin portal for managing expenses
+Admin portal for managing expenses by Joseph Ian Farillas
