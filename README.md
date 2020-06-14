@@ -1,2 +1,2 @@
 # Expense Manager
-A web portal for managing expenses by Joseph Ian Farillas
+A web portal for tracking expenses by Joseph Ian Farillas
