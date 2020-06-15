@@ -21,6 +21,7 @@
     "bootstrap-vue": "^2.14.0",
     "chart.js": "^2.9.3",
     "lodash": "^4.17.15",
+    "lodash.template": "^4.5.0",
     "luxon": "^1.24.1",
     "moment-timezone": "^0.5.29",
     "v-select2-component": "^0.4.3",
