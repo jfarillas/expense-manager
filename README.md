@@ -42,7 +42,7 @@ docker-compose up --build -d api
 npm install
 ```
 
-4. Go to the browser and type ``` http://127.0.0.1 ``` or ``` http://192.168.99.100 ``` if using Docker.
+4. Go to the browser and type ``` http://127.0.0.1 ``` or ``` http://192.168.99.100 ``` if you are using Docker.
 <img src="api/public/img/expenses-manager.png" />
 
 
