@@ -1,0 +1,48 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-8-test
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysqldata:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=expense_manager
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "8082:3306"
+
+  api:
+    container_name: test-api
+    command: bash -c "php artisan serve --host=0.0.0.0 --port=8000"
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    # Used for swarm deployments with CPU and Memory resource limits. 
+    # Command to deploy in docker stack (eg. docker stack deploy --compose-file=docker-compose.yml stackname)
+    # deploy: 
+    #   resources:
+    #     limits:
+    #       memory: 2048M
+    #     reservations:
+    #       memory: 512M
+    volumes:
+      - api:/usr/src/api
+    ports:
+      - "80:8000"
+    tty: true
+    depends_on:
+      - mysql
+
+volumes:
+  api:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/jfarillas/test/api
+  mysqldata:
+    external: true

@@ -1,0 +1,20 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Header
+@import '../sass/header.scss';
+
+// Forms
+@import '../sass/form.scss';
+
+// Tabs
+@import '../sass/tabs.scss';
+
+// List (on the table)
+@import '../sass/list.scss';

@@ -1,0 +1,79 @@
+.block__div--categories .table th:not(:last-child), 
+.block__div--categories .table td:not(:last-child),
+.block__div--roles .table th:not(:nth-child(2)):not(:nth-child(4)),
+.block__div--roles .table td:not(:nth-child(2)):not(:nth-child(4)) {
+  padding-left: 40px;
+  padding-right: 40px
+}
+
+.block__div--roles .table td:nth-child(2) > input {
+  width: 150px;
+}
+
+.block__div--roles .permissions {
+  width: 140px;
+}
+
+.block__div--roles .permissions:nth-child(5n) {
+  break-after: always;
+}
+
+.table span.edit {
+  color: #3490dc;
+  margin-right: 15px;
+}
+
+.table span.delete {
+  color: #e3342f;
+}
+
+.table span.edit, .table span.delete {
+  cursor: pointer;
+}
+
+.table tr.highlight-success-updated {
+  background-color: #28a745;
+  animation: blinker 1s linear infinite;
+}
+
+.table tr.highlight-error {
+  background-color: #e3342f;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.table td .container-error {
+  margin: 5px 0;
+  text-align: center;
+  border-radius: 0.25rem;
+  background-color: #e3342f;
+}
+
+.table span.error {
+  color: #fff;
+}
+
+/** Transition */
+
+/** For row */
+.list-item {
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(500px);
+}
+.list-enter-active:nth-child(1), .list-enter:nth-child(1) {
+  background-color: #28a745;
+}
+.list-leave-active, .list-leave-to {
+  background-color: #e3342f;
+}
