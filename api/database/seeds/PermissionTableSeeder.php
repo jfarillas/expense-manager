@@ -13,29 +13,79 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-       $permissions = [
-           'view_roles',
-           'create_roles',
-           'edit_roles',
-           'delete_roles',
-           'view_users',
-           'create_users',
-           'edit_users',
-           'delete_users',
-           'view_category',
-           'create_category',
-           'edit_category',
-           'delete_category',
-           'view_expenses',
-           'create_expenses',
-           'edit_expenses',
-           'delete_expenses',
-           'edit_password'
+        $permissions = [
+            [
+                'name' => 'view_roles',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'create_roles',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'edit_roles',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'delete_roles',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'view_users',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'create_users',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'edit_users',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'delete_users',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'view_category',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'create_category',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'edit_category',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'delete_category',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'view_expenses',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'create_expenses',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'edit_expenses',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'delete_expenses',
+                'guard_name' => 'api'
+            ],
+            [
+                'name' => 'edit_password',
+                'guard_name' => 'api'
+            ]
         ];
 
-
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create($permission);
         }
     }
 }
