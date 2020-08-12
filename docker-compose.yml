@@ -43,6 +43,6 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/jfarillas/test/api
+      device: /home/jfarillas/expense-manager/api
   mysqldata:
     external: true
