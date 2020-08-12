@@ -19,7 +19,7 @@ services:
     container_name: test-api
     command: bash -c "php artisan serve --host=0.0.0.0 --port=8000"
     build:
-      context: ./api
+      context: .
       dockerfile: Dockerfile
     # Used for swarm deployments with CPU and Memory resource limits. 
     # Command to deploy in docker stack (eg. docker stack deploy --compose-file=docker-compose.yml stackname)
@@ -43,6 +43,6 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/jfarillas/expense-manager/api
+      device: /home/jfarillas/expense-manager
   mysqldata:
     external: true
