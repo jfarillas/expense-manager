@@ -31,11 +31,17 @@ Route::prefix('v1')->group(function() {
             'as' => 'user.updatePassword',
             'uses' => 'api\UserController@updatePassword'
         ]);
-        Route::resource('roles', 'api\RoleController', [
+
+        // For shared hosting - HTTP method manually call
+        Route::get('roles', 'api\RoleController@index');
+        Route::post('roles', 'api\RoleController@store');
+        Route::patch('roles', 'api\RoleController@update');
+        Route::delete('roles', 'api\RoleController@destroy');
+        /* Route::resource('roles', 'api\RoleController', [
             'except' => [
                 'getRoles'
             ]
-        ]);
+        ]); */
         Route::resource('categories', 'api\CategoryController');
         Route::resource('expenses', 'api\ExpensesController', [
             'except' => [
