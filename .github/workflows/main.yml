@@ -54,7 +54,8 @@ jobs:
         heroku_app_name: "expensemgr" #Must be unique in Heroku
         heroku_email: "jfarillas.dev@gmail.com"
         # justlogin: true
-        dontautocreate: true
+        dontautocreate: true 
+        branch: "main"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
