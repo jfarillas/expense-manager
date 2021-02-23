@@ -47,20 +47,15 @@ jobs:
         git commit -m "Build front-end assets"
         git push -f origin dev
 
-    - name: Login to Heroku Container registry
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login 
-
-    - name: Build and push
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a expensemgr web
-
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a expensemgr web 
+    - name: Deploy to Heroku
+      uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "expensemgr" #Must be unique in Heroku
+        heroku_email: "jfarillas.dev@gmail.com"
+        # justlogin: true
+        branch: "dev"
+        dontautocreate: true 
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
