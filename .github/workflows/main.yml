@@ -1,10 +1,10 @@
-name: CI for Non-developement Environment
+name: CI for Staging/Production Environments
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   laravel-tests:
@@ -45,17 +45,17 @@ jobs:
         git config --local user.name "jfarillas"
         git add -f composer.lock package-lock.json public/ bootstrap/ storage/
         git commit -m "Build front-end assets"
-        git push -f origin master
+        git push -f origin main
 
-    - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "expensemgr" #Must be unique in Heroku
-        heroku_email: "jfarillas.dev@gmail.com"
-        # justlogin: true
-        dontautocreate: true 
-        branch: "master"
+    # - name: Deploy to Heroku
+    #  uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+    #  with:
+    #    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #    heroku_app_name: "expensemgr" #Must be unique in Heroku
+    #    heroku_email: "jfarillas.dev@gmail.com"
+    #    # justlogin: true
+    #    dontautocreate: true 
+    #    branch: "main"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
