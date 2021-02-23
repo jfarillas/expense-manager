@@ -45,7 +45,7 @@ jobs:
         git config --local user.name "jfarillas"
         git add -f composer.lock package-lock.json public/ bootstrap/ storage/
         git commit -m "Build front-end assets"
-        git push -f origin dev
+        git push -f origin master
 
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
