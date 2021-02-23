@@ -244,7 +244,7 @@ export default new Vuex.Store({
     roles (context, payload) {
       return new Promise((resolve, reject) => {
         const id = null;
-        apiService.getData('roles', id).then((res) => {
+        apiService.getData('role-options', id).then((res) => {
           let data = res.data || res;
           let wrapped = [];
           _.reverse(data);

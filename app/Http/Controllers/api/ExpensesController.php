@@ -52,7 +52,7 @@ class ExpensesController extends ResponseController
         $validator = Validator::make($request->all(), [
             'expense_date' => 'required',
             'categories_id' => 'required',
-            'account' => 'required',
+            'type' => 'required',
             'amount' => 'required|numeric'
         ]);
 
@@ -112,7 +112,7 @@ class ExpensesController extends ResponseController
         $validator = Validator::make($request->all(), [
             'expense_date' => 'required',
             'categories_id' => 'required',
-            'account' => 'required',
+            'type' => 'required',
             'amount' => 'required|numeric'
         ]);
 

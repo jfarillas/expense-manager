@@ -22,21 +22,32 @@ export class APIService {
   }
 
   async updateData(route, payload, id) {
-    const url = `${API_URL}/${route}/${id}`;
+    const flag = 'update';
+    const url = `${API_URL}/${route}/${id}/${flag}`;
+    //const url = `${API_URL}/${route}/${id}`;
     //let payload = JSON.stringify(data);
     console.log(payload);
-    return await axios.put(url, payload, {withCredentials: true});
+    return await axios.post(url, payload, {withCredentials: true});
+    //return await axios.patch(url, payload, {withCredentials: true});
   }
 
   async updatePassword(route, payload, id) {
-    const url = `${API_URL}/${route}/${id}/update-password`;
+    const flag = 'update-password';
+    const url = `${API_URL}/${route}/${id}/${flag}`;
     //let payload = JSON.stringify(data);
     console.log(payload);
-    return await axios.put(url, payload, {withCredentials: true});
+    return await axios.post(url, payload, {withCredentials: true});
+    //return await axios.put(url, payload, {withCredentials: true});
   }
 
   async deleteData(route, id) {
-    const url = `${API_URL}/${route}/${id}`;
-    return await axios.delete(url, {withCredentials: true});
+    const flag = 'delete';
+    const url = `${API_URL}/${route}/${id}/${flag}`;
+    //const url = `${API_URL}/${route}/${id}`;
+    let payload = {
+      flag: 1
+    }; 
+    return await axios.post(url, payload, {withCredentials: true});
+    //return await axios.delete(url, {withCredentials: true});
   }
 }

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\ResponseController as ResponseController;
 use App\Role;
+use App\User;
 use Spatie\Permission\Models\Permission;
 use App\Traits\BenchTrait;
 use DB;
@@ -34,9 +35,22 @@ class RoleController extends ResponseController
      */
     public function index(Request $request)
     {
-        $roles = Role::with('getPermissions')->get();
+        $roles = [];
+        $users = User::with('roles')->get();
+        $ctr = 0;
+        foreach ($users as $user) {
+            $roles[$ctr]['user_id'] = $user->id;
+            $roles[$ctr]['user_roles'] = Role::with('getPermissions')
+            ->where('id', $user->roles[0]['id'])
+            ->get();
+            $ctr++;
+        }
         return $this->sendResponseData($roles, $request);
     }
+
+    /**
+     * Getter for merging role and user model
+     */
 
     /**
      * Display a listing of the resource for guest.

@@ -53,7 +53,24 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
     }
 
-    public function getAllPermissionsAttribute() {
+    /**
+     * Get role permissions from the controller then set it here.
+     *
+     * @param  object  $value
+     * @return object
+     */
+    public function setRolePermissionsAttribute($value)
+    {
+        $this->attributes['role_permissions'] = $value;
+    }
+
+    /**
+     * Get all permissions.
+     *
+     * @return array
+     */
+    public function getAllPermissionsAttribute() 
+    {
         $permissions = [];
         foreach (Permission::all() as $permission) {
             if (Auth::user()->can($permission->name)) {

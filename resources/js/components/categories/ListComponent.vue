@@ -22,10 +22,12 @@
         class="d-flex flex-row justify-content-center">
           <actions @edit="editItem(value.id)"
           @delete="deleteCategory"
+          :fetched-data="fetchedData"
           :confirm-title="'Delete Category'"
           :confirm-body="'Permanently delete this category'"
           :confirm-body-item-no="`#${value.id}`"
-          :value-id="value.id">
+          :value-id="value.id"
+          :highlight-row-success-added="highlightRowSuccessAdded">
             <slot v-if="$can('edit_category')" name="edit"></slot>
             <slot v-if="$can('delete_category')" name="delete"></slot>
           </actions>
@@ -98,10 +100,12 @@
         class="d-flex flex-row justify-content-center">
           <actions @edit="editItem(row.id)" 
           @delete="deleteCategory"
+          :fetched-data="fetchedData"
           :confirm-title="'Delete Category'"
           :confirm-body="'Permanently delete this category'"
           :confirm-body-item-no="`#${row.id}`"
-          :value-id="row.id">
+          :value-id="row.id"
+          :highlight-row-success-added="highlightRowSuccessUpdated || highlightRowSuccessAdded">
             <slot name="edit"></slot>
             <slot name="delete"></slot>
           </actions>

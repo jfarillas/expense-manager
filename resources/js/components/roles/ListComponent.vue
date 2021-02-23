@@ -12,14 +12,14 @@
     </thead>
     <transition-group name="list" tag="tbody" v-if="fetchedData && !editFlag">
       <tr v-for="value in fetchedData" 
-      :key="value.id"
+      :key="value[0].id"
       :class="{ 'list-enter-active': highlightRowSuccessAdded }" 
       class="list-item">
-        <th scope="row">{{ value.id }}</th>
-        <td>{{ value.name }}</td>
+        <th scope="row">{{ value[0].id }}</th>
+        <td>{{ value[0].name }}</td>
         <td>
           <div class="d-flex flex-wrap">
-            <div v-for="val in value.get_permissions" 
+            <div v-for="val in value[0].get_permissions" 
             :key="val.id"
             class="permissions px-3">
               {{ val.name | underscoreToSpace | capitalize }}
@@ -28,12 +28,15 @@
         </td>
         <td v-if="$can('edit_roles') || $can('delete_roles')"
         class="d-flex flex-row justify-content-center">
-          <actions @edit="editItem(value.id)" 
+          <actions @edit="editItem(value[0].id)" 
           @delete="deleteRole"
+          :user-id="value[0].user_id"
+          :component="$route.name"
           :confirm-title="'Delete Role'"
           :confirm-body="'Permanently delete this role'"
-          :confirm-body-item-no="`ID ${value.id}`"
-          :value-id="value.id">
+          :confirm-body-item-no="`ID ${value[0].id}`"
+          :value-id="value[0].id"
+          :highlight-row-success-added="highlightRowSuccessAdded">
             <slot v-if="$can('edit_roles')" name="edit"></slot>
             <slot v-if="$can('delete_roles')" name="delete"></slot>
           </actions>
@@ -244,7 +247,7 @@
         <td v-if="editID === row.id && (!updatedId || editUpdatedID)" 
         class="d-flex flex-row justify-content-center">
           <button v-if="disabled !== 'disabled'"
-          @click="updateRole(checkRole[row.id], row.id, permissionAccess[row.id])"
+          @click="updateRole(checkRole[row.id], row.id, permissionAccess[row.id], editData[row.id].user_id)"
           :aria-disabled="ariaNotEditable(!ariaDisabledReadOnly)" 
           class="btn btn-primary">Update</button>
 
@@ -264,10 +267,13 @@
         class="d-flex flex-row justify-content-center">
           <actions @edit="editItem(row.id)" 
           @delete="deleteRole"
+          :user-id="editData[row.id].user_id"
+          :component="$route.name"
           :confirm-title="'Delete Role'"
           :confirm-body="'Permanently delete this role'"
           :confirm-body-item-no="`ID ${row.id}`"
-          :value-id="row.id">
+          :value-id="row.id"
+          :highlight-row-success-added="highlightRowSuccessUpdated || highlightRowSuccessAdded">
             <slot name="edit"></slot>
             <slot name="delete"></slot>
           </actions>
@@ -359,7 +365,7 @@
         (this.updatedId) ? this.unlockUpdatedID : '';
       },
 
-      updateRole: function(name, id, isAdmin) {
+      updateRole: function(name, id, isAdmin, userId) {
         // Disable the button
         this.disabled = 'disabled';
         this.ariaDisabledReadOnly = true;
@@ -401,7 +407,7 @@
             this.permissionsError = null;
             // Reload the list
             console.log(`Updated ID :: ${id}`);
-            this.$emit('updatedData', { id: id, obj: this.$store.dispatch('roleUpdate', id) });
+            this.$emit('updatedData', { id: id, user_id: userId, obj: this.$store.dispatch('roleUpdate', id) });
             // Lock each edit field
             this.editUpdatedID = false;
             // Row highlighting for updated data

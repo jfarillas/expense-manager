@@ -64,32 +64,41 @@
     methods: {
       formatData: function(data) {
         // Formatting values from the data in preparing items for the possible modification/deletion
-        _.keys(data).map((key, index) => {
-          this.editData[data[key].id] = {
-            name: data[key].name
+        //_.keys(data).map((key, index) => {
+          this.editData[data.id] = {
+            user_id: data.user_id,
+            name: data.name
           };
 
           // Append permission/s to the permissions data
-          this.$set(this.permissions, data[key].id, []);
+          this.$set(this.permissions, data.id, []);
           
-          _.keys(data[key].get_permissions).forEach(index => {
-            _(this.permissions[data[key].id])
-            .push(data[key].get_permissions[index].name)
+          _.keys(data.get_permissions).forEach(index => {
+            _(this.permissions[data.id])
+            .push(data.get_permissions[index].name)
             .value();
           });
-        });
+        //});
         console.log(this.editData);
         console.log(this.permissions);
       },
 
       fetchAll: function(id) {
+        let roleData = [];
         this.$store.dispatch('rolesList').then(res => {
-          this.data = res;
+          Object.keys(res).forEach((key) => {
+            Object.keys(res[key].user_roles).forEach((subKey) => {
+              res[key].user_roles[subKey]['user_id'] = res[key].user_id;
+            });
+            roleData.push(res[key].user_roles);
+          });
+          this.data = roleData;
           console.log(this.data);
-          // Formatting values from the data in preparing items for the possible modification/deletion
-          this.formatData(this.data);
-          // May use this for appending counters on data
-          //this.ctr = this.counter(this.data);
+          Object.keys(this.data).forEach((k) => {
+            // Formatting values from the data in preparing items for the possible modification/deletion
+            this.formatData(this.data[k][0]);
+          });
+          
         });
       },
 
@@ -97,12 +106,18 @@
         obj.then(res => {
           // Get new inserted ID from the data
           this.id = res[0].id;
-          let wrapper = _(this.data)
-          .unshift(res[0])
-          .value();
+          // Unshift new data if the data array is not empty. Otherwise use push()
+          if (this.data.length === 0) {
+            this.data = [];
+            _(this.data).push(res[0]).value();
+          } else {
+            _(this.data).unshift(res).value();
+          }
           console.log(res);
-          // Formatting values from the data in preparing items for the possible modification/deletion
-          this.formatData(res);
+          Object.keys(this.data).forEach((k) => {
+            // Formatting values from the data in preparing items for the possible modification/deletion
+            this.formatData(this.data[k][0]);
+          });
           // Row hightlight fade in
           this.highlightRowSuccessAdded = true;
           // Row hightlight fade out
@@ -111,7 +126,7 @@
       },
 
       updateDataList: function(value) {
-        let updatedIndex = _.findIndex(this.data, function(obj) { return obj.id === value.id });
+        //let updatedIndex = _.findIndex(this.data, function(obj) { return obj.id === value.id });
 
         // Indicates that a specific record has been updated successfully
         this.updatedID = value.id;
@@ -119,17 +134,24 @@
         value.obj.then(res => {
           let convertRoleList = {
             id: res[0].id,
+            user_id: value.user_id,
             name: res[0].name,
             get_permissions: res[0].get_permissions
           }
           console.log(this.observerToNormalObj(convertRoleList));
-          this.data.splice(updatedIndex, 1, this.observerToNormalObj(convertRoleList));
+          //this.data.splice(updatedIndex, 1, this.observerToNormalObj(convertRoleList));
           console.log(this.data);
           // Flush the data keys when it reloads (to prevent from duplicates)
           // before it formats its value
           this.editData = [];
-          // Formatting values from the data in preparing items for the possible modification/deletion
-          this.formatData(this.data);
+          Object.keys(this.data).forEach((k) => {
+            console.log(`${this.data[k][0].id} === ${value.id}`);
+            if (this.data[k][0].id === value.id) {
+              this.data[k].splice(0, 1, this.observerToNormalObj(convertRoleList));
+            }
+            // Formatting values from the data in preparing items for the possible modification/deletion
+            this.formatData(this.data[k][0]);
+          });
         });
       },
 
@@ -157,6 +179,7 @@
     mounted() {
       console.log('Component mounted.');
       console.log(this.$route);
+      console.log(this.adminConfigPermissions);
     }
   }
 </script>

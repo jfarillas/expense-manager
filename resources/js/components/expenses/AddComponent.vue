@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="account" class="col-md-4 col-form-label text-md-right">Account</label>
+      <label for="account" class="col-md-4 col-form-label text-md-right">Type</label>
       <div class="col-md-6">
         <Select2 v-model="accountValue" 
         :options="accountOptions"
@@ -175,12 +175,10 @@
         let payload = {
           expense_date: this.expense_date,
           categories_id: this.categoryValue,
-          account: this.accountValue,
+          type: this.accountValue,
           amount: this.amount,
           description: this.description
         }
-
-        console.log(payload);
 
         apiService.addData(this.$route.name, payload).then((res) => {
           if (typeof res.data.message.error === 'undefined') {
@@ -203,7 +201,7 @@
             // Validation errors
             this.datetimeError = (!this.expense_date || res.data.message.error.expense_date) ? res.data.message.error.expense_date[0] : null;
             this.categoryIDError = (!this.categoryValue || res.data.message.error.categories_id) ? res.data.message.error.categories_id[0] : null;
-            this.accountError = (!this.accountValue || res.data.message.error.account) ? res.data.message.error.account[0] : null;
+            this.accountError = (!this.accountValue || res.data.message.error.type) ? res.data.message.error.type[0] : null;
             this.amountError = (!this.amount || res.data.message.error.amount) ? res.data.message.error.amount[0] : null;
             // Convert back to default ISO datetime
             (this.expense_date) 

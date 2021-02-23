@@ -5,7 +5,7 @@
         <th scope="col">#</th>
         <th scope="col">Date</th>
         <th scope="col">Category</th>
-        <th scope="col">Account</th>
+        <th scope="col">Type</th>
         <th scope="col">Amount</th>
         <th scope="col">Description</th>
         <th v-if="$can('edit_expenses') || $can('delete_expenses')"
@@ -21,17 +21,19 @@
         <th scope="row">{{ value.id }}</th>
         <td>{{ value.expense_date | moment("MMMM DD, YYYY, hh:mm A") }}</td>
         <td>{{ value.categories.type }}</td>
-        <td>{{ value.account }}</td>
+        <td>{{ value.type }}</td>
         <td>{{ value.amount }}</td>
         <td>{{ value.description | ellipsis }}</td>
         <td v-if="$can('edit_expenses') || $can('delete_expenses')"
         class="d-flex flex-row justify-content-center">
           <actions @edit="editItem(value.id)" 
           @delete="deleteExpense"
+          :fetched-data="fetchedData"
           :confirm-title="'Delete Expense'"
           :confirm-body="'Permanently delete this expense'"
           :confirm-body-item-no="`#${value.id}`"
-          :value-id="value.id">
+          :value-id="value.id"
+          :highlight-row-success-added="highlightRowSuccessAdded">
             <slot v-if="$can('edit_expenses')" name="edit"></slot>
             <slot v-if="$can('delete_expenses')" name="delete"></slot>
           </actions>
@@ -89,7 +91,7 @@
         </td>
 
         <td v-if="editID === row.id && (!updatedId || editUpdatedID)">
-          <Select2 v-model="editData[index].account"
+          <Select2 v-model="editData[index].type"
           :options="accountOptions"
           :settings="{ placeholder: 'Select an expense type' }"
           :id="`account-${row.id}`"
@@ -106,7 +108,7 @@
         </td>
 
         <td v-if="editID !== row.id || (updatedId === row.id && !editUpdatedID)">
-          {{ row.account }}
+          {{ row.type }}
         </td>
 
         <td v-if="editID === row.id && (!updatedId || editUpdatedID)">
@@ -164,10 +166,12 @@
         class="d-flex flex-row justify-content-center">
           <actions @edit="editItem(row.id)" 
           @delete="deleteExpense"
+          :fetched-data="fetchedData"
           :confirm-title="'Delete Expense'"
           :confirm-body="'Permanently delete this expense'"
           :confirm-body-item-no="`#${row.id}`"
-          :value-id="row.id">
+          :value-id="row.id"
+          :highlight-row-success-added="highlightRowSuccessUpdated || highlightRowSuccessAdded">
             <slot name="edit"></slot>
             <slot name="delete"></slot>
           </actions>
@@ -265,7 +269,7 @@
         let payload = {
           expense_date: modifiedData.expense_date,
           categories_id: modifiedData.categories_id,
-          account: modifiedData.account,
+          type: modifiedData.type,
           amount: modifiedData.amount,
           description: modifiedData.description
         }
@@ -293,7 +297,7 @@
             // Validation errors
             this.datetimeError = (!modifiedData.expense_date || res.data.message.error.expense_date) ? res.data.message.error.expense_date[0] : null;
             this.categoryIDError = (!modifiedData.categories_id || res.data.message.error.categories_id) ? res.data.message.error.categories_id[0] : null;
-            this.accountError = (!modifiedData.account || res.data.message.error.account) ? res.data.message.error.account[0] : null;
+            this.accountError = (!modifiedData.type || res.data.message.error.type) ? res.data.message.error.type[0] : null;
             this.amountError = (!modifiedData.amount || res.data.message.error.amount) ? res.data.message.error.amount[0] : null;
             // Convert back to default ISO datetime
             modifiedData.expense_date = new Date(modifiedData.expense_date).toISOString();

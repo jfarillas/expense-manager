@@ -1,13 +1,13 @@
 <template>
   <transition-group name="list" tag="tbody">
-    <tr v-for="value in fetchedData" :key="value.id" 
+    <tr v-for="value in fetchedData" :key="value[0].id" 
     :class="{
       'list-enter-active': highlightRowSuccessAdded,
-      'highlight-success-updated': (value.id === dataId && highlightRow),
-      'highlight-error': (value.id === dataId && highlightRowError)
+      'highlight-success-updated': (value[0].id === dataId && highlightRow),
+      'highlight-error': (value[0].id === dataId && highlightRowError)
     }"
     class="list-item">
-      <slot :row="value" :index="value.id"></slot>
+      <slot :row="value[0]" :index="value[0].id"></slot>
     </tr>
   </transition-group>
 </template>

@@ -1,13 +1,16 @@
 <template>
   <section>
-    <span slot="edit" @click="editItem" class="edit">
+    <span v-if="!highlightRowSuccessAdded" slot="edit" @click="editItem" class="edit">
       <font-awesome-icon 
       icon="edit" 
       size="1x"
       title="Edit">
       </font-awesome-icon>
     </span>
-    <span slot="delete" v-b-modal="'modal-center-'+valueId" class="delete">
+    <span v-if="!(component === 'roles' && userId === $id()) && !highlightRowSuccessAdded" 
+    slot="delete"
+    v-b-modal="'modal-center-'+valueId"
+    class="delete">
       <font-awesome-icon
       icon="trash-alt" 
       size="1x"
@@ -34,6 +37,12 @@
   export default  {
     name: 'components-utilities-actions-components',
     props: {
+      userId: {
+        type: Number
+      },
+      component: {
+        type: String
+      },
       valueId: {
         type: Number
       },
@@ -45,6 +54,9 @@
       },
       confirmBodyItemNo: {
         type: String
+      },
+      highlightRowSuccessAdded: {
+        type: Boolean
       }
     },
     components: {

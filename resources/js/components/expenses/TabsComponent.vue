@@ -56,7 +56,7 @@
           this.editData[data[key].id] = {
             expense_date: new Date(data[key].expense_date).toISOString(),
             categories_id: data[key].categories_id,
-            account: data[key].account,
+            type: data[key].type,
             amount: data[key].amount,
             description: data[key].description
           }
@@ -77,9 +77,13 @@
         obj.then(res => {
           // Get new inserted ID from the data
           this.id = res[0].id;
-          let wrapper = _(this.data)
-          .unshift(res[0])
-          .value();
+          // Unshift new data if the data array is not empty. Otherwise use push()
+          if (this.data.length === 0) {
+            this.data = [];
+            _(this.data).push(res[0]).value();
+          } else {
+            _(this.data).unshift(res[0]).value();
+          }
           console.log(this.data);
           // Formatting values from the data in preparing items for the possible modification/deletion
           this.formatData(res);

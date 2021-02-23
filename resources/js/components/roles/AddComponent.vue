@@ -320,11 +320,11 @@
           console.log(this.permissions);
 
           // Temporarily store admin permissions if possible for re-selected
-          this.$store.dispatch('tempPermissionsSingle', this.permissions);
+          //this.$store.dispatch('tempPermissionsSingle', this.permissions);
 
           console.log('----Check permission----');
           console.log(this.permissions);
-          console.log(this.$store.getters.tempPermissionsSingle);
+          //console.log(this.$store.getters.tempPermissionsSingle);
 
           return this.permissions;
         },

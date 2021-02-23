@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->bigIncrements('id');
             $table->dateTime('expense_date', 0);
             $table->unsignedBigInteger('categories_id');
-            $table->enum('type', ['cash', 'card', 'accounts']);
+            $table->enum('type', ['cash', 'card', 'savings']);
             $table->decimal('amount', 8, 2);
             $table->longText('description');
             $table->timestamps();
