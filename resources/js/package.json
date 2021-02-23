@@ -22,7 +22,7 @@
     "braces": "^3.0.2",
     "chart.js": "^2.9.3",
     "deep-extend": "^0.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash.template": "^4.5.0",
     "luxon": "^1.24.1",
     "moment-timezone": "^0.5.29",
