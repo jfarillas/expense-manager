@@ -43,17 +43,19 @@ jobs:
       run: |
         git config --local user.email "joseph_farillas@yahoo.com"
         git config --local user.name "jfarillas"
-        git add -f composer.lock package-lock.json public/ bootstrap/ storage/
+        git add -f package-lock.json public/ bootstrap/ storage/
         git commit -m "Build front-end assets"
         git push -f origin dev
 
-    - name: Deploy to Heroku
+    - name: Login to Heroku
       uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "expensemgr" #Must be unique in Heroku
         heroku_email: "jfarillas.dev@gmail.com"
-        remote_branch: "dev"
+
+    - name: Deploy to Heroku
+      run: git push heroku dev
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
