@@ -48,11 +48,11 @@ jobs:
         git push -f origin dev
 
     - name: Deploy to Heroku
-    - uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "expensemgr" #Must be unique in Heroku
-          heroku_email: "jfarillas.dev@gmail.com"
+      uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "expensemgr" #Must be unique in Heroku
+        heroku_email: "jfarillas.dev@gmail.com"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
