@@ -1,4 +1,4 @@
-name: CI for Non-development Environments
+name: CI for Staging/Production Environments
 
 on:
   push:
