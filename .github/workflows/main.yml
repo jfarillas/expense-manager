@@ -1,4 +1,4 @@
-name: CI for Non-developement Environment
+name: CI for Non-development Environment
 
 on:
   push:
