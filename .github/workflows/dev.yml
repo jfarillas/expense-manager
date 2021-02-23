@@ -53,7 +53,7 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "expensemgr" #Must be unique in Heroku
         heroku_email: "jfarillas.dev@gmail.com"
-      run: git push heroku dev
+        branch: "dev"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
