@@ -1,7 +1,7 @@
 # Expense Manager
 A web portal for tracking expenses by Joseph Ian Farillas
 
-## Installation guide
+## Installation
 1. Git clone the project:
 ```
 git clone https://github.com/jfarillas/expense-manager.git
