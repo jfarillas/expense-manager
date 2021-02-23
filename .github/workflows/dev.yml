@@ -43,7 +43,7 @@ jobs:
       run: |
         git config --local user.email "joseph_farillas@yahoo.com"
         git config --local user.name "jfarillas"
-        git add -f package-lock.json public/ bootstrap/ storage/
+        git add -f composer.lock package-lock.json public/ bootstrap/ storage/
         git commit -m "Build front-end assets"
         git push -f origin dev
 
