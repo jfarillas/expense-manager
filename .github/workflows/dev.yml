@@ -56,7 +56,9 @@ jobs:
         justlogin: true
 
     - name: Deploy to Heroku
-      run: git push heroku dev
+      run: |
+        heroku git:remote -a expensemgr
+        git push heroku dev
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
