@@ -53,7 +53,7 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "expensemgr" #Must be unique in Heroku
         heroku_email: "jfarillas.dev@gmail.com"
-        justlogin: true
+        # justlogin: true
         branch: "dev"
         dontautocreate: true
 
