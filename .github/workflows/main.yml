@@ -23,7 +23,7 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    # - name: Create Databases
+    # - name: Create Database
     #    run: php artisan migrate
 
     - name: Generate key
