@@ -1,11 +1,11 @@
 /*!
-  * vue-router v3.1.6
-  * (c) 2020 Evan You
+  * vue-router v3.5.1
+  * (c) 2021 Evan You
   * @license MIT
   */
 
 /*!
- * BootstrapVue Icons, generated from Bootstrap Icons 1.0.0-alpha3
+ * BootstrapVue Icons, generated from Bootstrap Icons 1.2.2
  *
  * @link https://icons.getbootstrap.com/
  * @license MIT
@@ -13,10 +13,15 @@
  */
 
 /*!
- * Chart.js v2.9.3
+ * Chart.js v2.9.4
  * https://www.chartjs.org
- * (c) 2019 Chart.js Contributors
+ * (c) 2020 Chart.js Contributors
  * Released under the MIT License
+ */
+
+/*!
+ * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
 /*!
@@ -59,14 +64,14 @@
  */
 
 /*!
- * vue-datetime v1.0.0-beta.13
+ * vue-datetime v1.0.0-beta.14
  * (c) 2020 Mario Juárez
  * Released under the MIT License.
  */
 
 /*!
- * vuex v3.4.0
- * (c) 2020 Evan You
+ * vuex v3.6.2
+ * (c) 2021 Evan You
  * @license MIT
  */
 
@@ -130,8 +135,6 @@
 
 //! moment.js
 
-//! moment.js language configuration
-
 //! moment.js locale configuration
 
-//! version : 0.5.29
+//! version : 0.5.33
