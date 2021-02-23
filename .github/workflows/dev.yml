@@ -43,10 +43,9 @@ jobs:
       run: |
         git config --local user.email "joseph_farillas@yahoo.com"
         git config --local user.name "jfarillas"
-        git checkout -b deploy
         git add -f public/
         git commit -m "Build front-end assets"
-        git push -f origin deploy
+        git push -f origin dev
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
