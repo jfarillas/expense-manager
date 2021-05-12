@@ -20,7 +20,7 @@
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.14.0",
     "braces": "^3.0.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "deep-extend": "^0.6.0",
     "lodash": "^4.17.19",
     "lodash.template": "^4.5.0",
