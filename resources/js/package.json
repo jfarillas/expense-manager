@@ -24,7 +24,7 @@
     "deep-extend": "^0.6.0",
     "lodash": "^4.17.19",
     "lodash.template": "^4.5.0",
-    "luxon": "^1.24.1",
+    "luxon": "^1.28.1",
     "moment-timezone": "^0.5.29",
     "uglify-js": "^3.9.4",
     "v-select2-component": "^0.4.3",
